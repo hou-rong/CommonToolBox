@@ -9,11 +9,15 @@ from setuptools import setup, find_packages
 
 setup(
     name='common-toolbox',
-    version='0.0.3',
+    version='0.0.4',
     license='MIT',
     description="Common ToolBox",
     install_requires=[
-        'pymysql', 'pymongo',
+        'scipy',
+        'pymysql',
+        'pymongo',
+        'pillow',
+        'nose'
     ],
     packages=find_packages(where='.', exclude=['']),
     test_utils='Test',

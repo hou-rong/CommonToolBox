@@ -17,8 +17,8 @@ class TestHash(unittest.TestCase):
                          '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08')
 
     def test_file_hash(self):
-        file_path = os.path.dirname(os.path.abspath(__file__))
-        self.assertEqual(file_hash(os.path.join(file_path, 'HashTestFile')), 'f673dd36c99aa9b6aa0e88236956796d')
+        path = os.path.dirname(os.path.abspath(__file__))
+        self.assertEqual(file_hash(os.path.join(path, 'HashTestFile')), 'f673dd36c99aa9b6aa0e88236956796d')
 
     def test_token(self):
         self.assertEqual(get_token({'test': 'test'}), '2359cdd9f6124ef769448b8f34c54d65')
