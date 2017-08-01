@@ -25,6 +25,10 @@ def is_legal(s):
     return False
 
 
+def key_modify(s: str) -> str:
+    return s.strip().lower()
+
+
 def get_or_default(a, b, default):
     """
     get b from a if exists else return default

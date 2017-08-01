@@ -6,7 +6,7 @@
 # @File    : CommonTest.py
 # @Software: PyCharm
 import unittest
-from Utils.Common import *
+from toolbox.Common import *
 
 
 class TestCommon(unittest.TestCase):
@@ -28,6 +28,9 @@ class TestCommon(unittest.TestCase):
 
     def test_is_legal_true(self):
         self.assertEqual(is_legal('test'), True)
+
+    def test_key_modify(self):
+        self.assertEqual(key_modify('  TeST  '), 'test')
 
 
 if __name__ == '__main__':

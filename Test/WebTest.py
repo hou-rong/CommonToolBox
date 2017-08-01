@@ -6,7 +6,7 @@
 # @File    : WebTest.py
 # @Software: PyCharm
 import unittest
-from Utils.Web import *
+from toolbox.Web import *
 
 
 class TestWeb(unittest.TestCase):

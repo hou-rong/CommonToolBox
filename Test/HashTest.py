@@ -7,7 +7,7 @@
 # @Software: PyCharm
 import os
 import unittest
-from Utils.Hash import *
+from toolbox.Hash import *
 
 
 class TestHash(unittest.TestCase):

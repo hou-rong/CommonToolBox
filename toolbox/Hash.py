@@ -7,7 +7,7 @@
 # @Software: PyCharm
 import json
 import hashlib
-import Utils.Types
+import toolbox.Types
 
 
 def encode(string, hasher=hashlib.md5) -> str:
@@ -15,7 +15,7 @@ def encode(string, hasher=hashlib.md5) -> str:
 
 
 def file_hash(file_or_path, hasher=hashlib.md5):
-    if isinstance(file_or_path, Utils.Types.StringTypes):
+    if isinstance(file_or_path, toolbox.Types.StringTypes):
         file_obj = open(file_or_path, mode='rb')
     else:
         file_obj = file_or_path
