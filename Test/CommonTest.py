@@ -32,6 +32,12 @@ class TestCommon(unittest.TestCase):
     def test_key_modify(self):
         self.assertEqual(key_modify('  TeST  '), 'test')
 
+    def test_is_chinese_true(self):
+        self.assertEqual(is_chinese('我'), True)
+
+    def test_is_chinese_false(self):
+        self.assertEqual(is_chinese('a'), False)
+
 
 if __name__ == '__main__':
     unittest.main()

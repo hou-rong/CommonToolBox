@@ -25,6 +25,13 @@ def is_legal(s):
     return False
 
 
+def is_chinese(uchar):
+    if '\u4e00' <= uchar <= "\u9fa5":
+        return True
+    else:
+        return False
+
+
 def key_modify(s: str) -> str:
     return s.strip().lower()
 
