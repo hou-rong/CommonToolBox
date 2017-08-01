@@ -9,6 +9,6 @@ import unittest
 from toolbox.System import *
 
 
-class SystemTest(unittest.TestCase):
+class TestSystem(unittest.TestCase):
     def test_get_local_ip_false(self):
         self.assertNotEqual(get_local_ip(), '127.0.0.1')
