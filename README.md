@@ -22,3 +22,9 @@
 ```bash
 pip install common-toolbox
 ```
+
+## Todo
+
+- [ ] python2 支持
+- [ ] 使用时安装相关依赖
+- [ ] ...
