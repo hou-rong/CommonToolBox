@@ -53,8 +53,15 @@ def get_or_default(a, b, default):
         return default
 
 
-def dot_get(target_dict, s, default=''):
-    return reduce(partial(get_or_default, default=default), s.split('.'), target_dict)
+def dot_get(target_dict, *args, **kwargs):
+    default = kwargs.get('default', '')
+    if len(args) == 0:
+        return default
+    for arg in args:
+        res = reduce(partial(get_or_default, default=default), arg.split('.'), target_dict)
+        if res != default:
+            return res
+    return default
 
 
 def i_do_not_care_list_or_dict(s):

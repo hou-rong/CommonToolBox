@@ -14,6 +14,9 @@ class TestCommon(unittest.TestCase):
         self.assertEqual(dot_get({'a': 2, 'b': {'a': 2}}, 'b.a.c'), '')
         self.assertEqual(dot_get({'a': 2, 'b': {'a': 2}}, 'b.a'), 2)
 
+    def test_dot_get_multi(self):
+        self.assertEqual(dot_get({'a': 2, 'b': {'a': 2}}, 'b.a.c', 'b.a'), 2)
+
     def test_i_do_not_care_list_or_dict(self):
         case = ['s', 'd', 'b']
         for index, res in enumerate(i_do_not_care_list_or_dict(case)):
