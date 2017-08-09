@@ -44,6 +44,8 @@ def get_or_default(a, b, default):
     :param default:
     :return:
     """
+    if isinstance(a, list):
+        a = a[0]
     if hasattr(a, '__contains__'):
         if b in a:
             return getitem(a, b)
