@@ -33,7 +33,8 @@ def date_range(start_date, end_date, day_step=1, ignore_days=0):
 def date_until(end_date, day_step=1, ignore_days=0):
     dt = datetime.datetime.now()
     start_date = dt.strftime(DATE_FORMAT)
-    yield from date_range(start_date=start_date, end_date=end_date, day_step=day_step, ignore_days=ignore_days)
+    for i in date_range(start_date=start_date, end_date=end_date, day_step=day_step, ignore_days=ignore_days):
+        yield i
 
 
 def date_takes(take_days, day_step=1, ignore_days=0):

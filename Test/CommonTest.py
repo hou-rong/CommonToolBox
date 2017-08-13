@@ -5,6 +5,7 @@
 # @Site    : 
 # @File    : CommonTest.py
 # @Software: PyCharm
+# from __future__ import unicode_literals
 import unittest
 from toolbox.Common import *
 
@@ -112,10 +113,16 @@ class TestCommon(unittest.TestCase):
         self.assertEqual(key_modify('  TeST  '), 'test')
 
     def test_is_chinese_true(self):
-        self.assertEqual(is_chinese('我'), True)
+        self.assertEqual(is_chinese('我'.decode('utf8')), True)
 
     def test_is_chinese_false(self):
         self.assertEqual(is_chinese('a'), False)
+
+    def test_is_all_chinese_string_true(self):
+        self.assertEqual(all(is_chinese(c) for c in "你好世界".decode('utf8')), True)
+
+    def test_is_all_chinese_string_false(self):
+        self.assertEqual(all(is_chinese(c) for c in "你好世界，Hello World".decode('utf8')), False)
 
 
 if __name__ == '__main__':

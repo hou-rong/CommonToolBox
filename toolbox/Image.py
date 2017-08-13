@@ -5,6 +5,7 @@
 # @Site    : 
 # @File    : Image.py
 # @Software: PyCharm
+import six
 from scipy import misc
 
 
@@ -53,7 +54,7 @@ def is_complete_scale_ok(image_name, min_sum_pixels=200000, min_scale=0.9, max_s
         flag = 3
 
     # scale
-    scale = width / height
+    scale = float(width) / float(height)
     if scale < min_scale:
         if width < 500:
             flag = 4

@@ -5,6 +5,7 @@
 # @Site    : 
 # @File    : Common.py
 # @Software: PyCharm
+from __future__ import unicode_literals
 from functools import partial, reduce
 from operator import getitem
 
@@ -26,13 +27,17 @@ def is_legal(s):
 
 
 def is_chinese(uchar):
-    if '\u4e00' <= uchar <= "\u9fa5":
+    """
+    :type uchar: unicode
+    :return: bool
+    """
+    if "\u4e00" <= uchar <= "\u9fa5":
         return True
     else:
         return False
 
 
-def key_modify(s: str) -> str:
+def key_modify(s):
     return s.strip().lower()
 
 
@@ -70,7 +75,8 @@ def i_do_not_care_list_or_dict(s):
     if isinstance(s, dict):
         yield s
     elif isinstance(s, list):
-        yield from s
+        for i in s:
+            yield i
     elif isinstance(s, str):
         pass
     else:

@@ -7,7 +7,12 @@
 # @Software: PyCharm
 import re
 import functools
-from urllib.parse import urlparse
+import vine.five
+
+if vine.five.PY2:
+    from urlparse import urlparse
+else:
+    from urllib.parse import urlparse
 
 
 def soap_body(soap_action):
@@ -23,7 +28,11 @@ def soap_body(soap_action):
     return wrapper
 
 
-def modify_url(raw_url: str) -> str:
+def modify_url(raw_url):
+    """
+    :type raw_url: str
+    :return: str
+    """
     if not bool(re.match(r'^https?:/{2}\w.+$', raw_url or '')):
         return ''
 
