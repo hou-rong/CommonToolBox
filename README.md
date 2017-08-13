@@ -1,8 +1,11 @@
 # CommonToolBox
 
-[![](https://img.shields.io/badge/python-3.4-green.svg)](https://www.python.org/download/releases/3.4.0/)
-[![](https://img.shields.io/badge/python-3.5-green.svg)](https://www.python.org/downloads/release/python-352/)
-[![](https://img.shields.io/badge/python-3.6-green.svg)](https://www.python.org/downloads/release/python-360/)
+[![](https://img.shields.io/badge/python-2.7.12-green.svg)](https://www.python.org/downloads/release/python-2712/)
+[![](https://img.shields.io/badge/python-3.4.6-green.svg)](https://www.python.org/download/releases/3.4.6/)
+[![](https://img.shields.io/badge/python-3.5.2-green.svg)](https://www.python.org/downloads/release/python-352/)
+[![](https://img.shields.io/badge/python-3.6.2-green.svg)](https://www.python.org/downloads/release/python-362/)
+[![](https://img.shields.io/badge/pypy-2.7.13-green.svg)](https://pypy.org/download.html)
+[![](https://img.shields.io/badge/jython-2.7.0-green.svg)](http://www.jython.org/downloads.html)
 [![](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 
@@ -25,6 +28,6 @@ pip install common-toolbox
 
 ## Todo
 
-- [ ] python2 支持
+- [x] python2 支持
 - [ ] 使用时安装相关依赖
 - [ ] ...

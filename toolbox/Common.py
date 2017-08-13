@@ -6,17 +6,19 @@
 # @File    : Common.py
 # @Software: PyCharm
 from __future__ import unicode_literals
+
+import six
 from functools import partial, reduce
 from operator import getitem
 
 
 def is_legal(s):
     if s:
-        if isinstance(s, str):
+        if isinstance(s, six.string_types):
             if s.strip():
                 if s.lower() != 'null':
                     return True
-        elif isinstance(s, int):
+        elif isinstance(s, six.integer_types):
             if s > -1:
                 return True
 
@@ -77,7 +79,7 @@ def i_do_not_care_list_or_dict(s):
     elif isinstance(s, list):
         for i in s:
             yield i
-    elif isinstance(s, str):
+    elif isinstance(s, six.string_types):
         pass
     else:
         raise Exception("Unknown Type {0}".format(type(s)))

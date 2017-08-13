@@ -1,3 +1,5 @@
+six
+vine
 scipy
 pymysql
 pymongo
