@@ -125,6 +125,22 @@ class TestCommon(unittest.TestCase):
     def test_is_all_chinese_string_false(self):
         self.assertEqual(all(is_chinese(c) for c in u"你好世界，Hello World"), False)
 
+    def test_get_keys(self):
+        get_key = GetKey()
+        get_key.update_priority({
+            ('name', 'name_en'): {
+                'daodao': 10,
+                'qyer': 5
+            },
+            ('star', 'grade'): {
+                'daodao': 5,
+                'qyer': 10
+            }
+        })
+
+        self.assertEqual(get_key.get_key_by_priority_or_default({'daodao': 'abc', 'qyer': 'bbc'}, 'name'), 'abc')
+        self.assertEqual(get_key.get_key_by_priority_or_default({'daodao': 5, 'qyer': 3}, 'grade'), 3)
+
 
 if __name__ == '__main__':
     unittest.main()

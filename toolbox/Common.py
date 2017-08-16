@@ -10,6 +10,7 @@ from __future__ import unicode_literals
 import six
 from functools import partial, reduce
 from operator import getitem
+from collections import defaultdict
 
 
 def is_legal(s):
@@ -83,3 +84,73 @@ def i_do_not_care_list_or_dict(s):
         pass
     else:
         raise Exception("Unknown Type {0}".format(type(s)))
+
+
+class GetKey(object):
+    def __init__(self):
+        self.priority = defaultdict(list)
+        self.filter = is_legal
+
+    def update_priority(self, priority):
+        """
+        update key's priority
+        priority will like this
+
+        {
+            ['name', 'name_en']: {
+                'source_1': 10,
+                'source_2': 9
+                ,
+                'source_3': 8
+            },
+            ['grade', 'star']: {
+                'source_1': 8,
+                'source_2': 10,
+                'source_3': 6
+            },
+            'default': None
+        }
+
+        1 level is key's name
+        2 level is source name
+        3 level is priority
+
+        :type priority: dict
+        :return: value your want
+        """
+        self.priority.update(priority)
+
+    def update_filter(self, legal_filter):
+        """
+        filter is a function which can check your value is legal,
+        if the value is not legal, we will use the lower priority
+        key's value
+        :param legal_filter:
+        :return:
+        """
+        self.filter = legal_filter
+
+    def get_key_by_priority_or_default(self, src, key_name='default', default=''):
+        """
+        get value from dict by key's priority or default value
+        :type src: dict
+        :type key_name: str
+        :type default: str
+        :return: default or highest priority and legal key's value
+        """
+        if len(src.keys()) == 0:
+            return default
+
+        # get priority dict or default
+        priority = None
+        for k, v in self.priority.items():
+            if key_name in k:
+                priority = v
+        if not priority:
+            priority = self.priority['default']
+
+        # get values
+        for k, v in sorted(src.items(), key=lambda x: priority[x[0]], reverse=True):
+            if is_legal(v):
+                return v
+        return default
