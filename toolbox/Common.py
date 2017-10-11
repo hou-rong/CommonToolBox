@@ -12,6 +12,8 @@ from functools import partial, reduce
 from operator import getitem
 from collections import defaultdict
 
+MIN_PRIORITY = 1
+
 
 def is_legal(s):
     if s:
@@ -150,7 +152,10 @@ class GetKey(object):
             priority = self.priority['default']
 
         # get values
-        for k, v in sorted(src.items(), key=lambda x: priority[x[0]], reverse=True):
-            if is_legal(v):
+        for k, v in sorted(
+                src.items(),
+                key=lambda x: priority.get(x[0], priority.get('default', MIN_PRIORITY)),
+                reverse=True):
+            if self.filter(v):
                 return v
         return default

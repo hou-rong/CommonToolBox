@@ -141,6 +141,29 @@ class TestCommon(unittest.TestCase):
         self.assertEqual(get_key.get_key_by_priority_or_default({'daodao': 'abc', 'qyer': 'bbc'}, 'name'), 'abc')
         self.assertEqual(get_key.get_key_by_priority_or_default({'daodao': 5, 'qyer': 3}, 'grade'), 3)
 
+    def test_get_keys_filter(self):
+        get_key = GetKey()
+        get_key.update_priority({
+            ('name', 'name_en'): {
+                'daodao': 10,
+                'qyer': 5
+            },
+            ('star', 'grade'): {
+                'daodao': 5,
+                'qyer': 10
+            }
+        })
+
+        def legal_filter(v):
+            if v == 'abc':
+                return False
+            else:
+                return True
+
+        get_key.update_filter(legal_filter=legal_filter)
+
+        self.assertEqual(get_key.get_key_by_priority_or_default({'daodao': 'abc', 'qyer': 'bbc'}, 'name'), 'bbc')
+
 
 if __name__ == '__main__':
     unittest.main()
