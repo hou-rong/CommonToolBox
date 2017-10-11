@@ -132,7 +132,7 @@ class GetKey(object):
         """
         self.filter = legal_filter
 
-    def get_key_by_priority_or_default(self, src, key_name='default', default=''):
+    def get_key_by_priority_or_default(self, src, key_name='default', default='', special_filter=None):
         """
         get value from dict by key's priority or default value
         :type src: dict
@@ -156,6 +156,10 @@ class GetKey(object):
                 src.items(),
                 key=lambda x: priority.get(x[0], priority.get('default', MIN_PRIORITY)),
                 reverse=True):
-            if self.filter(v):
-                return v
+            if special_filter:
+                if special_filter(v):
+                    return v
+            else:
+                if self.filter(v):
+                    return v
         return default
