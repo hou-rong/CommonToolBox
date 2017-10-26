@@ -84,6 +84,10 @@ def is_all(string, check_func=is_chinese):
     return all(check_func(c) for c in string)
 
 
+def has_any(string, check_func=is_chinese):
+    return any(check_func(c) for c in string)
+
+
 def key_modify(s):
     return s.strip().lower()
 

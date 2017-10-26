@@ -147,6 +147,12 @@ class TestCommon(unittest.TestCase):
     def test_is_all_chinese_string_false(self):
         self.assertFalse(is_all(u"你好世界，Hello World", check_func=is_chinese))
 
+    def test_has_any_chinese_string_true(self):
+        self.assertTrue(has_any(u"你好世界，Hello World", check_func=is_chinese))
+
+    def test_has_any_chinese_string_false(self):
+        self.assertFalse(has_any(u"Hello World", check_func=is_chinese))
+
     def test_get_keys(self):
         get_key = GetKey()
         get_key.update_priority({
