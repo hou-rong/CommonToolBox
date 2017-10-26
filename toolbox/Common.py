@@ -12,7 +12,7 @@ from functools import partial, reduce
 from operator import getitem
 from collections import defaultdict
 
-MIN_PRIORITY = 1
+MIN_PRIORITY = -1
 
 
 def is_legal(s):
@@ -147,9 +147,16 @@ def i_do_not_care_list_or_dict(s):
 
 
 class GetKey(object):
-    def __init__(self):
+    def __init__(self, no_key_event=0):
+        """
+        初始化获取 key 的函数
+        :param no_key_event:
+        0 如果没有这个源的 key ，则认为最低默认值使用
+        1 如果没有这个源的 key，则跳过，如果均没有，返回默认值
+        """
         self.priority = defaultdict(list)
         self.filter = is_legal
+        self.no_key_event = no_key_event
 
     def update_priority(self, priority):
         """
@@ -190,7 +197,7 @@ class GetKey(object):
         """
         self.filter = legal_filter
 
-    def get_key_by_priority_or_default(self, src, key_name='default', default='', special_filter=None):
+    def get_key_by_priority_or_default(self, src, key_name='default', default='', special_filter=None, **kwargs):
         """
         get value from dict by key's priority or default value
         :type src: dict
@@ -200,6 +207,10 @@ class GetKey(object):
         """
         if len(src.keys()) == 0:
             return default
+        if 'no_key_event' in kwargs:
+            __no_key_event = kwargs['no_key_event']
+        else:
+            __no_key_event = self.no_key_event
 
         # get priority dict or default
         priority = None
@@ -210,9 +221,20 @@ class GetKey(object):
             priority = self.priority['default']
 
         # get values
+        if __no_key_event == 0:
+            src_items = src.items()
+
+            def ordered_key(x):
+                return priority.get(x[0], priority.get('default', MIN_PRIORITY))
+        else:
+            src_items = filter(lambda x: x[0] in priority.keys(), src.items())
+
+            def ordered_key(x):
+                return priority[x[0]]
+
         for k, v in sorted(
-                src.items(),
-                key=lambda x: priority.get(x[0], priority.get('default', MIN_PRIORITY)),
+                src_items,
+                key=ordered_key,
                 reverse=True):
             if special_filter:
                 if special_filter(v):

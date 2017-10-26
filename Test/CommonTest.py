@@ -222,6 +222,27 @@ class TestCommon(unittest.TestCase):
         self.assertEqual(get_key.get_key_by_priority_or_default({'daodao': 'abc', 'qyer': 'bbc'}, 'name',
                                                                 special_filter=legal_filter), 'bbc')
 
+    def test_get_keys_no_key_event(self):
+        get_key = GetKey(no_key_event=1)
+        get_key.update_priority({
+            ('name', 'name_en'): {
+                'daodao': 10,
+                'qyer': 5
+            },
+            ('star', 'grade'): {
+                'daodao': 5,
+                'qyer': 10
+            }
+        })
+
+        self.assertEqual(
+            get_key.get_key_by_priority_or_default({'daodao': '', 'qyer': '', 'mafengwo': 'asdfasdfasdfasdf'}, 'name'),
+            '')
+        self.assertEqual(
+            get_key.get_key_by_priority_or_default({'daodao': '', 'qyer': 'abc', 'mafengwo': 'asdfasdfasdfasdf'},
+                                                   'name'),
+            'abc')
+
 
 if __name__ == '__main__':
     unittest.main()
