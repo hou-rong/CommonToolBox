@@ -153,6 +153,12 @@ class TestCommon(unittest.TestCase):
     def test_has_any_chinese_string_false(self):
         self.assertFalse(has_any(u"Hello World", check_func=is_chinese))
 
+    def test_is_all_latin_and_punctuation_true(self):
+        self.assertTrue(is_all(u'Español Hello World', check_func=is_latin_and_punctuation))
+
+    def test_is_all_latin_and_punctuation_false(self):
+        self.assertFalse(is_all(u'Español Hello World 你好 世界', check_func=is_latin_and_punctuation))
+
     def test_get_keys(self):
         get_key = GetKey()
         get_key.update_priority({

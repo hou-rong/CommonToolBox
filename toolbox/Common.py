@@ -80,6 +80,18 @@ def is_latin(uchar):
         return False
 
 
+def is_latin_and_punctuation(uchar):
+    """
+        判断一个 unicode 是否是拉丁字母以及拉丁衍生字母以及相应富豪
+        :type uchar: unicode
+        :return: bool
+        """
+    if ('\u0020' <= uchar <= '\u007e') or ('\u00a0' <= uchar <= '\u00ff'):
+        return True
+    else:
+        return False
+
+
 def is_all(string, check_func=is_chinese):
     return all(check_func(c) for c in string)
 
