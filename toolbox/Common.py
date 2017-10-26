@@ -33,6 +33,7 @@ def is_legal(s):
 
 def is_chinese(uchar):
     """
+    判断一个 unicode 是否是汉字
     :type uchar: unicode
     :return: bool
     """
@@ -40,6 +41,47 @@ def is_chinese(uchar):
         return True
     else:
         return False
+
+
+def is_number(uchar):
+    """
+    判断一个 unicode 是否是数字
+    :type uchar: unicode
+    :return: bool
+    """
+    if '\u0030' <= uchar <= '\u0039':
+        return True
+    else:
+        return False
+
+
+def is_alphabet(uchar):
+    """
+    判断一个 unicode 是否是英文字母
+    :type uchar: unicode
+    :return: bool
+    """
+    if ('\u0041' <= uchar <= '\u005a') or ('\u0061' <= uchar <= '\u007a'):
+        return True
+    else:
+        return False
+
+
+def is_latin(uchar):
+    """
+    判断一个 unicode 是否是拉丁字母以及拉丁衍生字母
+    :type uchar: unicode
+    :return: bool
+    """
+    if ('\u0041' <= uchar <= '\u005a') or ('\u0061' <= uchar <= '\u007a') or ('\u00c0' <= uchar <= '\u00d6') or (
+                    '\u00d8' <= uchar <= '\u00f6') or ('\u00f8' <= uchar <= '\u00ff'):
+        return True
+    else:
+        return False
+
+
+def is_all(string, check_func=is_chinese):
+    return all(check_func(c) for c in string)
 
 
 def key_modify(s):

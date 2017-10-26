@@ -119,11 +119,33 @@ class TestCommon(unittest.TestCase):
     def test_is_chinese_false(self):
         self.assertEqual(is_chinese('a'), False)
 
+    def test_is_num_true(self):
+        self.assertTrue(is_number(u'1'))
+
+    def test_is_num_false(self):
+        self.assertFalse(is_number(u'我'))
+
+    def test_is_alphabet_true(self):
+        self.assertTrue(is_alphabet(u'h'))
+        self.assertFalse(is_alphabet(u'ñ'))
+
+    def test_is_alphabet_false(self):
+        self.assertFalse(is_alphabet(u'我'))
+
+    def test_is_latin_true(self):
+        self.assertTrue(is_latin(u'ñ'))
+
+    def test_is_all_latin_true(self):
+        self.assertTrue(is_all(u'Español', check_func=is_latin))
+
+    def test_is_all_latin_false(self):
+        self.assertFalse(is_all(u'你好世界', check_func=is_latin))
+
     def test_is_all_chinese_string_true(self):
-        self.assertEqual(all(is_chinese(c) for c in u"你好世界"), True)
+        self.assertTrue(is_all(u"你好世界", check_func=is_chinese))
 
     def test_is_all_chinese_string_false(self):
-        self.assertEqual(all(is_chinese(c) for c in u"你好世界，Hello World"), False)
+        self.assertFalse(is_all(u"你好世界，Hello World", check_func=is_chinese))
 
     def test_get_keys(self):
         get_key = GetKey()
@@ -186,7 +208,7 @@ class TestCommon(unittest.TestCase):
         self.assertNotEqual(get_key.get_key_by_priority_or_default({'daodao': 'abc', 'qyer': 'bbc'}, 'name'), 'bbc')
 
         self.assertEqual(get_key.get_key_by_priority_or_default({'daodao': 'abc', 'qyer': 'bbc'}, 'name',
-                                                                   special_filter=legal_filter), 'bbc')
+                                                                special_filter=legal_filter), 'bbc')
 
 
 if __name__ == '__main__':
